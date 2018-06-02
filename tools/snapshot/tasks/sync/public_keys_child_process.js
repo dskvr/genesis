@@ -76,7 +76,7 @@ const run = () => {
       let pubkey = result.publicKey
       if(pubkey.length && typeof pubkey !== 'undefined' && !set.has(tx.from)) {
         db.sequelize.query( public_key_query(`("${tx.from}", "${pubkey}", ${tx.blockNumber})`), { retry: { match: [ /Deadlock/i ], max: 1000 } } )
-          .then( () => { update_state(), finished() )
+          .then( () => { update_state(), finished() } )
           .catch( e => { throw new Error(e) })
       } else {
         finished()
